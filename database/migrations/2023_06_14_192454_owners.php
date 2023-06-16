@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->autoIncrement();
             $table->string('full_name');
             $table->string('occupation');
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->timestamps();
         });
     }
