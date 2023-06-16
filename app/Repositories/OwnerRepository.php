@@ -13,6 +13,11 @@ class OwnerRepository
         $this->ownerModel = new Owner();
     }
 
+    public function list()
+    {
+        return $this->ownerModel->all();
+    }
+
     public function create($data)
     {
         $create = $this->ownerModel->create($data);

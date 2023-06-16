@@ -4,8 +4,9 @@ namespace App\Services\Owner;
 
 use App\Repositories\OwnerRepository;
 use App\Services\Interfaces\AbstractInterface;
+use App\Services\Services;
 
-class CreateOwnerService implements AbstractInterface
+class CreateOwnerService extends Services implements AbstractInterface
 {
     private $data;
     private OwnerRepository $ownerRepository;
@@ -18,10 +19,16 @@ class CreateOwnerService implements AbstractInterface
 
     public function execute()
     {
-        return $this->ownerRepository->create([
-            'full_name' => $this->data->full_name,
-            'occupation' => $this->data->occupation,
-            'cpf' => $this->data->cpf
-        ]);
+        try {
+            $createOwner = $this->ownerRepository->create([
+                'full_name' => $this->data->full_name,
+                'occupation' => $this->data->occupation,
+                'cpf' => $this->data->cpf
+            ]);
+
+            return $this->returnContent($createOwner, true);
+        } catch (\Exception $error) {
+            return $this->returnContent('The cpf is already in use', false, 400);
+        }
     }
 }

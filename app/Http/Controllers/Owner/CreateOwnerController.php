@@ -17,24 +17,23 @@ class CreateOwnerController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'full_name' => 'required',
-                'occupation' => 'required',
-                'cpf' => 'required'
-            ]);
+        $validator = Validator::make($request->all(), [
+            'full_name' => 'required',
+            'occupation' => 'required',
+            'cpf' => 'required'
+        ]);
 
-            if ($validator->fails()) {
-                return Redirect::back()->withErrors($validator->errors());
-            }
-
-            $createOwnerService = new CreateOwnerService($request);
-            
-            $saveOwner = $createOwnerService->execute();
-
-            return Redirect::back()->with('success', 'New owner created');
-        } catch (\Exception $error) {
-            return Redirect::back()->withErrors(['cpf' => 'The cpf is already in use']);
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator->errors());
         }
+
+        $createOwnerService = new CreateOwnerService($request);
+        $saveOwner = $createOwnerService->execute();
+
+        if (!$saveOwner['success']) {
+            return Redirect::back()->withErrors(['cpf' => $saveOwner['data']]);
+        }
+
+        return Redirect::back()->with('success', 'New owner created');
     }
 }

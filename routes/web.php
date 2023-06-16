@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Owner\CreateOwnerController;
+use App\Http\Controllers\Owner\ListOwnersController;
 //use App\Http\Controllers\Owner\OwnerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function ($group) {
-    Route::get('/owner', [CreateOwnerController::class, 'create'])->name('owner.create');
+    Route::get('/owner', [ListOwnersController::class, 'show'])->name('owner.list');
 
     Route::get('/owner/create', [CreateOwnerController::class, 'create'])->name('owner.create');
     Route::post('/owner/create', [CreateOwnerController::class, 'store']);
