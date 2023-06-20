@@ -5,7 +5,7 @@ use App\Http\Controllers\Owner\ListOwnersController;
 //use App\Http\Controllers\Owner\OwnerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Properties\CreatePropertiesController;
-use App\Http\Controllers\Properties\CreatePropertiesService;
+use App\Http\Controllers\Properties\ListPropertiesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function ($group) {
     Route::get('/owner/create', [CreateOwnerController::class, 'create'])->name('owner.create');
     Route::post('/owner/create', [CreateOwnerController::class, 'store']);
 
-    Route::get('/properties', [ListOwnersController::class, 'show'])->name('properties.list');
+    Route::get('/properties', [ListPropertiesController::class, 'show'])->name('properties.list');
     Route::get('/properties/create', [CreatePropertiesController::class, 'create'])->name('properties.create');
     Route::post('/properties/create', [CreatePropertiesController::class, 'store']);
 

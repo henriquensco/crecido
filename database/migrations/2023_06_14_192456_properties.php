@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->uuid('id')->autoIncrement();
             $table->string('title');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('street');
             $table->string('number');
             $table->string('reference');
@@ -22,13 +22,9 @@ return new class extends Migration
             $table->string('state');
             $table->string('zip_code');
 
-            $table->string('owner_id');
+            $table->uuid('owner_id');
             $table->timestamps();
         });
-
-        /* Schema::table('properties', function (Blueprint $table) {
-            $table->foreign('owner_id')->references('id')->on('owners');
-        }); */
     }
 
     /**

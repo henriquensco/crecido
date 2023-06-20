@@ -18,6 +18,10 @@ class OwnerRepository
         return $this->ownerModel->all();
     }
 
+    public function find($id) {
+        return $this->ownerModel->find($id);
+    }
+
     public function create($data)
     {
         $create = $this->ownerModel->create($data);

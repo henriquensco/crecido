@@ -16,7 +16,7 @@
                     </p>
                 @endif
 
-                <form method="POST" class="w-full" action="{{ route('properties.create') }}">
+                <form method="POST" class="w-full" action="{{ route('properties.create') }}" enctype="multipart/form-data">
                     @csrf
                     @method('post')
                     <div class="mb-4">
@@ -82,10 +82,11 @@
                     </div>
 
                     <div class="flex gap-4 mb-4">
-                        <select name="" id="">
+                        <select name="owner" id="owner">
                             @foreach ($owners['data'] as $owner)
-                                <option :value="{{ $owner->id }}">{{ $owner->full_name }}</option>
+                                <option value="{{ $owner->id }}">{{ $owner->full_name }}</option>
                             @endforeach
+                            <x-input-error :messages="$errors->get('owner')" class="mt-2" />
                         </select>
                         <a href="/owner/create" class="p-2 dark:bg-gray-200 rounded">New Properties's Owner</a>
                     </div>
